@@ -61,6 +61,7 @@ namespace file_management_tool_gt
                 foreach(string fileName in openFileDialog.FileNames)
                 {
                     selectedFiles.Items.Add(Path.GetFileName(fileName));
+                    
                 }
             }
         }
@@ -87,6 +88,11 @@ namespace file_management_tool_gt
             {
                 return "";
             }
+        }
+
+        private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Meddl Loide");
         }
     }
 }

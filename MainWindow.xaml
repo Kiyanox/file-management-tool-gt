@@ -19,19 +19,17 @@
             <Button Margin="0,0,0,0" Width="124" Click="selectRootFolderPath" Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Top" DockPanel.Dock="Left" Panel.ZIndex="1" Background="#FFDDDDDD">Select Root Folder</Button>
             <TextBox Name="RootFolderPathTextBox" TextWrapping="Wrap" Width="260" Height="20" HorizontalContentAlignment="Left" Margin="-123,-300,0,0" IsEnabled="False"/>
             <Button Margin="-70,0,0,0" Click="selectFiles" RenderTransformOrigin="0.514,0.476" Width="70" Content="Select Files" IsDefault="True" Cursor="Hand" DockPanel.Dock="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Button Margin="-260,77,0,0" Width="124" Click="getSelectedItem" Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Top" DockPanel.Dock="Left" Panel.ZIndex="1" Background="#FFDDDDDD">GetSelectedItem</Button>
+            
         </DockPanel>
         <DockPanel>
             <ListBox Width="500" Name="selectedFiles" Height="415">
                 <ListBox.ItemContainerStyle>
-                    <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}" >
-                        <EventSetter Event="MouseRightButtonDown" Handler="clickedItem"/>
+                    <Style TargetType="ListBoxItem">
+                        <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListBoxItem_Selected"/>
                     </Style>
                 </ListBox.ItemContainerStyle>
             </ListBox>
         </DockPanel>
-
-
     </DockPanel>
 
 </Window>

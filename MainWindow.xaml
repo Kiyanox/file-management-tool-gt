@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:file_management_tool_gt"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="File-Management-Tool" Height="450" Width="800">
+    <DockPanel Margin="10">
+        <Button HorizontalAlignment="Left" Margin="50,50,0,0" VerticalAlignment="Top" Click="selectFiles" RenderTransformOrigin="0.514,0.476" Width="70" Height="19" Content="Select Files"></Button>
+        <ListBox Width="500" Name="selectedFiles" SelectionChanged="selectFiles">
+            <Button VerticalAlignment="Top" Margin="10,10,0,0" Width="130" Height="20" Click="selectRootFolderPath">Select Root Folder</Button>
+        </ListBox>
+    </DockPanel>
+
 </Window>

@@ -90,9 +90,17 @@ namespace file_management_tool_gt
             }
         }
 
-        private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
+        private void LbiSelected(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Meddl Loide");
+            /*MessageBox.Show("Test");*/
         }
+        private void DeleteItem(object sender, RoutedEventArgs e)
+        {
+            if(selectedFiles.SelectedItem != null)
+            {
+                selectedFiles.Items.Remove(selectedFiles.SelectedItem);
+            } 
+        }
+
     }
 }

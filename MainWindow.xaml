@@ -6,30 +6,36 @@
         xmlns:local="clr-namespace:file_management_tool_gt"
         mc:Ignorable="d"
         Title="File-Management-Tool" Height="450" Width="800" ResizeMode="NoResize" Topmost="True" Cursor="Arrow" HorizontalAlignment="Stretch">
-    <DockPanel Margin="10">
-        <DockPanel Width="263" Margin="0,0,0,0" Height="413" RenderTransformOrigin="0.5,0.5">
-            <DockPanel.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="-0.216"/>
-                    <RotateTransform/>
-                    <TranslateTransform Y="-0.496"/>
-                </TransformGroup>
-            </DockPanel.RenderTransform>
-            <Button Margin="0,0,0,0" Width="124" Click="selectRootFolderPath" Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Top" DockPanel.Dock="Left" Panel.ZIndex="1" Background="#FFDDDDDD">Select Root Folder</Button>
-            <TextBox Name="RootFolderPathTextBox" TextWrapping="Wrap" Width="260" Height="20" HorizontalContentAlignment="Left" Margin="-123,-300,0,0" IsEnabled="False"/>
-            <Button Margin="-70,0,0,0" Click="selectFiles" RenderTransformOrigin="0.514,0.476" Width="70" Content="Select Files" IsDefault="True" Cursor="Hand" DockPanel.Dock="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            
-        </DockPanel>
-        <DockPanel>
-            <ListBox Width="500" Name="selectedFiles" Height="415">
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListBoxItem_Selected"/>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-            </ListBox>
-        </DockPanel>
-    </DockPanel>
+    <Grid Margin="0,0,1,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="271*"/>
+            <ColumnDefinition Width="528*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox  x:Name="selectedFiles" HorizontalAlignment="Center" Margin="0,5,0,64" RenderTransformOrigin="0.5,0.5" Width="498" Grid.Column="1">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <EventSetter Event="UIElement.PreviewMouseLeftButtonDown" Handler="LbiSelected"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+        <StackPanel Margin="0,287,0,0" HorizontalAlignment="Center" Width="252">
+            <Button Margin="0,0,0,0" Click="selectFiles" RenderTransformOrigin="0.514,0.476" Width="120" IsDefault="True" Cursor="Hand" DockPanel.Dock="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left">Select Files</Button>
+            <Button Width="120" Content="Remove File" HorizontalAlignment="Right" Margin="0,-20,0,0" Click="DeleteItem"/>
+            <TextBox Name="RootFolderPathTextBox" TextWrapping="Wrap" Text="Root Folder" Margin="0,20,0,0" HorizontalAlignment="Left" Width="252" IsEnabled="False"/>
+            <Button Margin="0,5,0,0" Width="139" Click="selectRootFolderPath" Cursor="Hand" HorizontalAlignment="Left" DockPanel.Dock="Left" Panel.ZIndex="1" Background="#FFDDDDDD" Height="20">Select Root Folder</Button>
+        </StackPanel>
+        <StackPanel x:Name="FileInformation" HorizontalAlignment="Left" Height="252" Margin="13,7,0,0" VerticalAlignment="Top" Width="249" Background="#FFC8C8C8">
+            <Label Content="File Information" Height="27" Width="249" HorizontalAlignment="Left" BorderBrush="#FF844D4D" Background="#FFB3B3B3">
+                <Label.OpacityMask>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Label.OpacityMask>
+            </Label>
+        </StackPanel>
+
+
+    </Grid>
 
 </Window>

@@ -102,5 +102,22 @@ namespace file_management_tool_gt
             } 
         }
 
+        private void ZipItem(String filePath, String fileName)
+        {
+            string startPath = filePath;
+            string zipPath = @".\" + fileName + ".zip";
+            string folderPath = "";
+
+            if (getIfFolderSelected())
+            {
+                folderPath = getFolderPath();
+            }
+
+            if(selectedFiles.SelectedItem != null)
+            {
+                ZipFile.CreateFromDirectory(startPath, zipPath);
+            }
+        }
+
     }
 }

@@ -10,18 +10,38 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.IO;
 using System.IO.Compression;
+using System.Runtime.Serialization;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using Microsoft.Win32;
+using System.Xml;
 
 namespace file_management_tool_gt
 {
+    [DataContract]
+    public class File
+    {
+        [DataMember]
+        public string filePath { get; set; }
+
+        [DataMember]
+        public string fileName { get; set; }
+
+        public File(string filePath, string fileName)
+        {
+            this.filePath = filePath;
+            this.fileName = fileName;
+        }
+    }
+
     public partial class MainWindow : Window
     {
 
         private String folderPath = "";
         private bool folderSelected = false;
+
+        List<File> files = new List<File> { };
 
         // Setter functions
 
@@ -61,7 +81,8 @@ namespace file_management_tool_gt
                 foreach(string fileName in openFileDialog.FileNames)
                 {
                     selectedFiles.Items.Add(Path.GetFileName(fileName));
-                    
+                    File file = new File(Path.GetFileName(fileName), Path.GetFullPath(fileName));
+                    files.Add(file);
                 }
             }
         }
@@ -119,5 +140,32 @@ namespace file_management_tool_gt
             }
         }
 
+        static void SaveViaDataContractSerialization<T>(T serializableObject, string filepath)
+        {
+            var serializer = new DataContractSerializer(typeof(T));
+            var settings = new XmlWriterSettings()
+            {
+                Indent = true,
+                IndentChars = "\t",
+            };
+            var writer = XmlWriter.Create(filepath, settings);
+            serializer.WriteObject(writer, serializableObject);
+            writer.Close();
+        }
+
+
+        static T LoadViaDataContractSerialization<T>(string filepath)
+        {
+            var fileStream = new FileStream(filepath, FileMode.Open);
+            var reader = XmlDictionaryReader.CreateTextReader(fileStream, new XmlDictionaryReaderQuotas());
+            var serializer = new DataContractSerializer(typeof(T));
+            T serializableObject = (T)serializer.ReadObject(reader, true);
+            reader.Close();
+            fileStream.Close();
+            return serializableObject;
+        }
+
     }
+
+
 }

@@ -41,7 +41,7 @@ namespace file_management_tool_gt
         private String folderPath = "";
         private bool folderSelected = false;
 
-        List<File> files = new List<File> { };
+        List<File> files = new List<File>();
 
         // Setter functions
 
